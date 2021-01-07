@@ -1,5 +1,9 @@
 package com.evolutionnext.concurrency.deadlock;
 
+/**
+ * * Two or more threads are blocked forever without resolution
+ * * Each thread is waiting on a lock but the other thread has a lock
+ */
 class Friend {
     private final String name;
 
