@@ -2,6 +2,12 @@ package com.evolutionnext.concurrency.cyclicbarrier;
 
 import java.util.concurrent.CyclicBarrier;
 
+/**
+ * * It enables you to define a synchronization object that suspends until
+ * the specified number of threads has reached the barrier point.
+ * * Call to `await` must be made within the `Thread`
+ * * When the amount of the barrier has been reached execution will resume
+ */
 public class CyclicBarrierRunner {
     public static void main(String[] args) {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(4, () -> {

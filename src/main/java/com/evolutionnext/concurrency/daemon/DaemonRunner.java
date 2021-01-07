@@ -10,7 +10,6 @@ public class DaemonRunner {
                     e.printStackTrace();
                 }
                 System.out.println("Going...");
-
             }
         });
 

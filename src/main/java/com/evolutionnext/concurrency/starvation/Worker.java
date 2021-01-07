@@ -13,11 +13,11 @@ public class Worker {
                 e.printStackTrace();
             }
             //wait will give other chances to other threads
-//            try {
-//                wait(1000);
-//            } catch (InterruptedException ex) {
-//                ex.printStackTrace();
-//            }
+            try {
+                wait(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
