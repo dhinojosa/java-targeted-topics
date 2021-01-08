@@ -18,6 +18,7 @@ public class StreamOrdering {
         Comparator<Integer> normal = Integer::compare;
         Comparator<Integer> reversed = normal.reversed();
         Collections.sort(listOfIntegers, reversed);
+
         listOfIntegers
             .stream()
             .forEach(e -> System.out.print(e + " "));
