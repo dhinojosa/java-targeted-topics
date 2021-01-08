@@ -23,7 +23,9 @@ public class CountdownLatchRunner {
         new Thread(new RunnableCommand(countDownLatch, "A")).start();
         Thread.sleep(2000);
         System.out.println(countDownLatch.getCount());
+        System.out.println("Last latch about to go down");
         new Thread(new RunnableCommand(countDownLatch, "B")).start();
+        System.out.println("Last latch down");
         Thread.sleep(2000);
         System.out.println(countDownLatch.getCount());
     }

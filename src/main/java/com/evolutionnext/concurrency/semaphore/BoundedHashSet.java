@@ -1,4 +1,4 @@
-package com.evolutionnext.semaphore;
+package com.evolutionnext.concurrency.semaphore;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -24,13 +24,15 @@ public class BoundedHashSet <T> {
     private final Set<T> set;
     private final Semaphore sem;
 
+
+
     public BoundedHashSet(int bound) {
         this.set = Collections.synchronizedSet(new HashSet<T>());
         sem = new Semaphore(bound);
     }
 
     public boolean add(T o) throws InterruptedException {
-        sem.acquire();
+        sem.acquire(); //if permit is not available, then block
         boolean wasAdded = false;
         try {
             wasAdded = set.add(o);

@@ -6,7 +6,22 @@ import java.util.function.Supplier;
 public class UsingExecutorService {
 
     public static void main(String[] args) {
+
+        ScheduledExecutorService scheduledExecutorService =
+            Executors.newScheduledThreadPool(4);
+
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                 //Query your MQ
+            }
+        }, 1000, 500, TimeUnit.MILLISECONDS);
+
         ExecutorService executorService = Executors.newCachedThreadPool();
+
+        Future<Integer> hello = executorService.submit(
+            () -> System.out.println("Hello"), 10);
+
         for (int i = 0; i < 5; i++) {
             final int x = i;
             executorService.submit(() -> {
