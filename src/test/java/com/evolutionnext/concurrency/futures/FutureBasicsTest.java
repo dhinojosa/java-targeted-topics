@@ -21,10 +21,10 @@ public class FutureBasicsTest {
         Callable<Integer> callable = new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                System.out.println("Inside ze future: " +
-                        Thread.currentThread().getName());
+                System.out.println("Inside the future: " +
+                    Thread.currentThread().getName());
                 System.out.println("Future priority: "
-                        + Thread.currentThread().getPriority());
+                    + Thread.currentThread().getPriority());
                 Thread.sleep(5000);
                 return 5 + 3;
             }
@@ -35,11 +35,14 @@ public class FutureBasicsTest {
         System.out.println("Main priority" +
                 Thread.currentThread().getPriority());
 
-        Future<Integer> future = fixedThreadPool.submit(callable);
+        Future<Integer> future =
+            fixedThreadPool.submit(callable);
 
         //This will block
         Integer result = future.get(); //block
         System.out.println("result = " + result);
+
+        fixedThreadPool.shutdown();
     }
 
 
@@ -49,12 +52,9 @@ public class FutureBasicsTest {
         ExecutorService cachedThreadPool =
                 Executors.newCachedThreadPool();
 
-        Callable<Integer> callable = new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                Thread.sleep(3000);
-                return 5 + 3;
-            }
+        Callable<Integer> callable = () -> {
+            Thread.sleep(3000);
+            return 5 + 3;
         };
 
         Future<Integer> future = cachedThreadPool.submit(callable);
@@ -72,18 +72,15 @@ public class FutureBasicsTest {
 
     private Future<Stream<String>> downloadingContentFromURL(final String url) {
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        return cachedThreadPool.submit(new Callable<Stream<String>>() {
-            @Override
-            public Stream<String> call() throws Exception {
-                URL netUrl = new URL(url);
-                URLConnection urlConnection = netUrl.openConnection();
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(
-                                urlConnection.getInputStream()));
-                return reader
-                        .lines()
-                        .flatMap(x -> Arrays.stream(x.split(" ")));
-            }
+        return cachedThreadPool.submit(() -> {
+            URL netUrl = new URL(url);
+            URLConnection urlConnection = netUrl.openConnection();
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(
+                    urlConnection.getInputStream()));
+            return reader
+                .lines()
+                .flatMap(x -> Arrays.stream(x.split(" ")));
         });
     }
 
@@ -130,7 +127,6 @@ public class FutureBasicsTest {
 
     @Test
     public void testFutureTaskAsRunnableInThread() throws ExecutionException, InterruptedException {
-
         FutureTask<Integer> futureTask =
                 new FutureTask<Integer>(new Callable<Integer>() {
             @Override

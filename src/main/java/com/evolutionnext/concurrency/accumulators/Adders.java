@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 public class Adders {
     public static void main(String[] args) {
-        LongAdder longAdder = new LongAdder();
+        LongAdder longAdder = new LongAdder();  //Contended
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         executorService.submit(() -> {
             for (int i = 0; i < 100; i++) {

@@ -15,10 +15,10 @@ public class MyRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.format("Processing %s in Thread: %s%n", name,
-                Thread.currentThread().getName());
+        System.out.format("Processing %s in Thread: %s, we are now %d/%d in waiting%n", name,
+                Thread.currentThread(), cyclicBarrier.getNumberWaiting(), cyclicBarrier.getParties());
         try {
-            cyclicBarrier.await();
+            cyclicBarrier.await(); //this may or may not last long
         } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }

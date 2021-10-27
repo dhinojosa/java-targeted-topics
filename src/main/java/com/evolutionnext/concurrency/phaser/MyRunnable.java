@@ -26,7 +26,7 @@ public class MyRunnable implements Runnable {
         phaser.arriveAndAwaitAdvance();
         System.out.format("Processing Phase 4 %s in Thread: %s%n", name,
                 Thread.currentThread().getName());
-        phaser.arriveAndAwaitAdvance();
+        phaser.arriveAndDeregister();
         System.out.format("Finally finishing %s in Thread: %s%n", name,
                 Thread.currentThread().getName());
     }

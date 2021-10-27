@@ -54,7 +54,7 @@ public class ScheduledFuturesTest {
                     }
                 }, 1, 1, TimeUnit.SECONDS);
 
-        Thread.sleep(6014);
+        Thread.sleep(20014);
         scheduledFuture.cancel(true);
         Thread.sleep(2000);
     }
@@ -72,7 +72,7 @@ public class ScheduledFuturesTest {
                         System.out.println("In Schedule: " +
                                 Thread.currentThread().getName());
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(4000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

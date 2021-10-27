@@ -25,7 +25,7 @@ class MyThread extends Thread {
         System.out.printf("Process Starting on %s%n", ProcessHandle.current().pid());
         System.out.format("Thread starting on %s%n", Thread.currentThread().getName());
         MyThread myThread = new MyThread();
-        myThread.start();
+        myThread.start();;
 
         Thread.sleep(10000);
 

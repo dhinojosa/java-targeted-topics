@@ -19,14 +19,14 @@ public class CountdownLatchRunner {
         new Thread(new RunnableListener(countDownLatch, "A")).start();
         new Thread(new RunnableListener(countDownLatch, "B")).start();
         Thread.sleep(2000);
-        System.out.println(countDownLatch.getCount());
-        new Thread(new RunnableCommand(countDownLatch, "A")).start();
+        System.out.println(countDownLatch.getCount()); //2
+        new Thread(new RunnableCommand(countDownLatch, "C")).start();
         Thread.sleep(2000);
-        System.out.println(countDownLatch.getCount());
+        System.out.println(countDownLatch.getCount()); //1
         System.out.println("Last latch about to go down");
-        new Thread(new RunnableCommand(countDownLatch, "B")).start();
+        new Thread(new RunnableCommand(countDownLatch, "D")).start();
         System.out.println("Last latch down");
         Thread.sleep(2000);
-        System.out.println(countDownLatch.getCount());
+        System.out.println(countDownLatch.getCount()); //0
     }
 }

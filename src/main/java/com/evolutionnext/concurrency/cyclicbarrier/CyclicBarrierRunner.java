@@ -14,6 +14,7 @@ public class CyclicBarrierRunner {
             System.out.println("Done");
         });
 
+
         Thread t1 = new Thread(new MyRunnable(cyclicBarrier, "A"));
         Thread t2 = new Thread(new MyRunnable(cyclicBarrier, "B"));
         Thread t3 = new Thread(new MyRunnable(cyclicBarrier, "C"));
